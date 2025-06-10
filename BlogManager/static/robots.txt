@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /404/
+Disallow: /500/
+Allow: /login/
+Allow: /register/
+Allow: /
+Allow:/author-aman/
+Sitemap: https://amanweb.pythonanywhere.com/sitemap.xml

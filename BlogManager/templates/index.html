@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google-site-verification" content="CzFSOoHz9ZFSeFWANxmH3Q4_1GTUq9yR0Z4ZfODURXQ" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Blog Manager by Aman Talikoti: A Python Flask and MySQL-powered platform for blogging and managing blogs effortlessly. Join now and start sharing your stories!">
+		<meta name="keywords" content="Blog Manager by Aman, Blog Manager by Aman Talikoti, Blog Manager, Blog Manager Python Flask, Blog Manager Python Flask MySQL, Blogging, Blogger, Blog Manager Pythonanywhere">
+		<meta name="author" content="Aman Talikoti">
+		<meta property="og:title" content="Blog Manager by Aman Talikoti" />
+		<meta property="og:description" content="A Python Flask and MySQL-powered platform for seamless blogging. Join Blog Manager by Aman Talikoti today and start sharing your stories!" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://amanweb.pythonanywhere.com" />
+		<meta property="og:image" content="{{ url_for('static', filename='og-image.png') }}">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+		<meta property="og:site_name" content="Blog Manager by Aman Talikoti" />
+		<title>Home - Blog Manager Hosted on PythonAnywhere</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+		<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+		<link rel="canonical" href="https://amanweb.pythonanywhere.com">
+		<!-- Google Structured Data (JSON-LD) -->
+		<script type="application/ld+json">
+			{
+			    "@context": "https://schema.org",
+			    "@type": "Blog",
+			    "url": "https://amanweb.pythonanywhere.com",
+			    "name": "Blog Manager by Aman",
+			    "description": "A dynamic blogging platform developed by Aman Talikoti. Hosted on PythonAnywhere and built with Flask and MySQL.",
+			    "publisher": {
+			        "@type": "Person",
+			        "name": "Aman Talikoti",
+			        "url": "https://amanweb.pythonanywhere.com",
+			        "sameAs": [
+			            "https://www.linkedin.com/in/aman-talikoti-905b33231/",
+			            "https://github.com/GWaman2007"
+			        ]
+			    },
+			    "author": {
+			        "@type": "Person",
+			        "name": "Aman Talikoti",
+			        "url": "https://amanweb.pythonanywhere.com"
+			    },
+			    "mainEntityOfPage": {
+			        "@type": "WebPage",
+			        "@id": "https://amanweb.pythonanywhere.com"
+			    },
+			    "blogPost": [
+			        {
+			            "@type": "BlogPosting",
+			            "headline": "Example Blog Title",
+			            "datePublished": "2025-01-10T10:00:00+05:30",
+			            "author": {
+			                "@type": "Person",
+			                "name": "Aman Talikoti",
+			                "url": "https://amanweb.pythonanywhere.com/author/aman-talikoti"
+			            },
+			            "publisher": {
+			                "@type": "Person",
+			                "name": "Aman Talikoti",
+			                "url": "https://amanweb.pythonanywhere.com"
+			            },
+			            "description": "An example blog post description.",
+			            "image": "https://amanweb.pythonanywhere.com/static/images/example-image.jpg",
+			            "url": "https://amanweb.pythonanywhere.com/blog/example"
+			        }
+			    ]
+			}
+		</script>
+		<style>
+			/* General Styling */
+			body {
+			font-family: 'Calibri', sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f9;
+			color: #333;
+			}
+			header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			}
+			.site-name {
+			font-size: 1.5rem;
+			font-weight: bold;
+			}
+			.button-container {
+			display: flex;
+			gap: 10px; /* Space between buttons */
+			}
+			.button-container a {
+			text-decoration: none;
+			padding: 8px 12px;
+			background-color: #007bff;
+			color: #fff;
+			border-radius: 5px;
+			font-size: 0.9rem;
+			flex: 1; /* Distribute space equally */
+			text-align: center; /* Center text */
+			}
+			.button-container a.logout-button {
+			background-color: #dc3545;
+			}
+			.notice {
+			background-color: #ffc107;
+			color: #333;
+			padding: 10px 15px;
+			border-radius: 5px;
+			text-align: center;
+			margin-bottom: 10px;
+			display: inline-block; /* Adjusts width to content */
+			}
+			main {
+			padding: 20px;
+			}
+			h2 {
+			color: #007bff;
+			margin-bottom: 15px;
+			}
+			.sort-options {
+			margin-bottom: 20px;
+			}
+			.sort-options label {
+			font-size: 1rem;
+			margin-right: 10px;
+			}
+			.sort-options select {
+			padding: 5px 10px;
+			font-size: 1rem;
+			}
+			.blog {
+			border: 1px solid #ddd;
+			padding: 15px;
+			margin-bottom: 15px;
+			border-radius: 5px;
+			background-color: #fff;
+			transition: transform 0.2s;
+			}
+			.blog:hover {
+			transform: scale(1.02);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+			.blog-header {
+			display: flex;
+			justify-content: space-between;
+			cursor: pointer;
+			}
+			.blog-title {
+			font-size: 1.2rem;
+			font-weight: bold;
+			}
+			.blog-author {
+			font-size: 0.9rem;
+			color: #666;
+			}
+			.blog-content {
+			margin-top: 10px;
+			display: none;
+			}
+			.btn-like,
+			.btn-unlike {
+			margin-right: 10px;
+			padding: 5px 10px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			}
+			.btn-unlike {
+			background-color: #dc3545;
+			}
+			.btn-like:hover,
+			.btn-unlike:hover {
+			opacity: 0.9;
+			}
+			.introduction {
+			margin-bottom: 20px;
+			padding: 15px;
+			background-color: #e9ecef;
+			border-radius: 5px;
+			}
+			.introduction h2 {
+			margin-bottom: 10px;
+			}
+			.introduction p {
+			margin: 0;
+			}
+			.ad-placeholder {
+			min-height: 200px;
+			}
+			/* Responsive Styling */
+			@media (max-width: 768px) {
+			header {
+			flex-direction: column;
+			align-items: flex-start;
+			}
+			.button-container {
+			flex-direction: column;
+			width: 100%;
+			}
+			.button-container a {
+			width: 100%;
+			margin-bottom: 10px;
+			}
+			.notice {
+			width: 100%;
+			}
+			}
+		</style>
+	</head>
+	<body class="homepage">
+		<header>
+			<div class="site-name">
+				Blog Manager
+			</div>
+			<div class="button-container">
+				{% if 'username' in session %}
+				<div class="welcome-message">Welcome, {{ session['username'] }}!</div>
+				<a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+				<a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+				{% else %}
+				<div class="notice">You are not logged in. Please log in or register.</div>
+				<a href="{{ url_for('login') }}" class="btn">Login</a>
+				<a href="{{ url_for('register') }}" class="btn">Register</a>
+				{% endif %}
+			</div>
+		</header>
+		<!-- Display flash messages -->
+		{% with messages = get_flashed_messages(with_categories=True) %}
+		{% if messages %}
+		<div class="flash-messages">
+			{% for category, message in messages %}
+			<div class="flash {{ category }}">{{ message }}</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+		{% endwith %}
+		<main class="main">
+			<!-- Introduction Section -->
+			<div class="introduction">
+				<h1>Welcome to Blog Manager!</h1>
+				<p>Hello! I’m a new Python Flask developer passionate about web development. This platform is a space for sharing thoughts, writing blogs, and collaborating to make the site better. Your contributions and feedback are highly valued. Let’s build something amazing together!</p>
+				<p>Please note: Abusive behavior will not be tolerated. Let's keep this space positive and constructive.</p>
+			</div>
+			<div class="latest-blogs">
+				<h2 id="blogs-heading">Latest Blogs</h2>
+				<!-- Sorting Options -->
+				<div class="sort-options">
+					<label for="sort-by">Sort by:</label>
+					<select id="sort-by" onchange="sortBlogs()">
+						<option value="latest" selected>Latest</option>
+						<option value="most-liked">Most Liked</option>
+					</select>
+				</div>
+				<!-- Blog List -->
+				{% if blogs %}
+				<div id="blogs-container">
+					{% for blog in blogs %}
+					<div class="blog" data-blog-id="{{ blog[0] }}" data-likes="{{ blog[4] }}" data-date="{{ blog[5] }}">
+						<div class="blog-header">
+							<div class="blog-title">{{ blog[1] }}</div>
+							<div class="blog-author">Author: {{ blog[3] }}</div>
+						</div>
+						<div class="blog-content">
+							<p>{{ blog[2] }}</p>
+							<div class="blog-time">Date and time: {{ blog[5] }}</div>
+							<div class="blog-likes-dislikes">
+								<form action="{{ url_for('like', blog_id=blog[0]) }}" method="post" class="inline-form">
+									<button type="submit" class="btn-like">Like</button>
+								</form>
+								<form action="{{ url_for('unlike', blog_id=blog[0]) }}" method="post" class="inline-form">
+									<button type="submit" class="btn-unlike">Unlike</button>
+								</form>
+								<span>{{ blog[4] }} Likes</span>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				{% else %}
+				<p>No blogs found.</p>
+				{% endif %}
+			</div>
+		</main>
+		<script>
+			document.querySelectorAll('.blog-header').forEach(header => {
+			    header.addEventListener('click', function() {
+			        const blogContent = this.nextElementSibling;
+			        blogContent.style.display = blogContent.style.display === 'none' ? 'block' : 'none';
+			    });
+			});
+
+			// Sort blogs dynamically
+			function sortBlogs() {
+			    const sortBy = document.getElementById('sort-by').value;
+			    const blogsContainer = document.getElementById('blogs-container');
+			    const blogs = Array.from(blogsContainer.children);
+			    const blogsHeading = document.getElementById('blogs-heading');
+
+			    if (sortBy === 'latest') {
+			        blogs.sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
+			        blogsHeading.textContent = "Latest Blogs";
+			    } else if (sortBy === 'most-liked') {
+			        blogs.sort((a, b) => b.dataset.likes - a.dataset.likes);
+			        blogsHeading.textContent = "Most Liked Blogs";
+			    }
+
+			    // Clear and reappend sorted blogs
+			    blogsContainer.innerHTML = '';
+			    blogs.forEach(blog => blogsContainer.appendChild(blog));
+			}
+		</script>
+		<section id="features" style="padding: 20px; background-color: #f9f9f9; text-align: center;">
+			<h2>Features of Blog Manager</h2>
+			<ul style="list-style: none; padding: 0; max-width: 800px; margin: 0 auto;">
+				<li style="margin: 15px 0; font-size: 1.2rem;">✔️ User-friendly blogging platform built with Python Flask and MySQL</li>
+				<li style="margin: 15px 0; font-size: 1.2rem;">✔️ Secure user authentication and role-based access control</li>
+				<li style="margin: 15px 0; font-size: 1.2rem;">✔️ Interactive dashboard for managing blogs, likes, and more</li>
+				<li style="margin: 15px 0; font-size: 1.2rem;">✔️ Mobile-responsive design for seamless browsing</li>
+				<li style="margin: 15px 0; font-size: 1.2rem;">✔️ Easy deployment and hosting on PythonAnywhere</li>
+			</ul>
+		</section>
+		<section id="cta" style="padding: 40px; background-color: #007bff; color: white; text-align: center;">
+			<h2 style="margin-bottom: 20px;">Ready to Start Blogging?</h2>
+			<p style="margin-bottom: 30px; font-size: 1.2rem;">Join Blog Manager by Aman Talikoti today and share your stories with the world. It's quick, secure, and free to get started!</p>
+			<a href="{{ url_for('register') }}" style="text-decoration: none; padding: 15px 30px; background-color: #ffc107; color: #333; font-size: 1rem; border-radius: 5px;">Get Started Now</a>
+		</section>
+		<a href="{{ url_for('author_aman') }}" class="btn">About Aman Talikoti</a>
+		<footer style="background-color: #333; color: white; padding: 30px 20px; text-align: center;">
+			<div style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+				<p>&copy; 2025 Blog Manager by Aman Talikoti. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</body>
+</html>

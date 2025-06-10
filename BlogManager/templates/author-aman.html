@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about Aman, the creator of AmanWeb. Discover his journey, expertise, and contributions to the community.">
+    <title>Author - Aman Talikoti</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Google Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aman Talikoti",
+    "url": "https://amanweb.pythonanywhere.com",
+    "sameAs": [
+        "https://www.linkedin.com/in/aman-talikoti-905b33231/",
+        "https://github.com/GWaman2007"
+    ]
+}
+    </script>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Calibri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+        }
+
+        .button-container a {
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            flex: 1; /* Distribute space equally */
+            text-align: center; /* Center text */
+        }
+
+        .button-container a.logout-button {
+            background-color: #dc3545;
+        }
+
+        .notice {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+            display: inline-block; /* Adjusts width to content */
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .sort-options {
+            margin-bottom: 20px;
+        }
+
+        .sort-options label {
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .sort-options select {
+            padding: 5px 10px;
+            font-size: 1rem;
+        }
+
+        .blog {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+
+        .blog:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-header {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .blog-author {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .blog-content {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn-like,
+        .btn-unlike {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-unlike {
+            background-color: #dc3545;
+        }
+
+        .btn-like:hover,
+        .btn-unlike:hover {
+            opacity: 0.9;
+        }
+
+        .introduction {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .introduction h2 {
+            margin-bottom: 10px;
+        }
+
+        .introduction p {
+            margin: 0;
+        }
+
+        .ad-placeholder {
+            min-height: 200px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button-container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .button-container a {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .notice {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="site-name">Blog Manager</div>
+    <div class="button-container">
+        <a href="{{ url_for('index') }}">Home</a>
+    </div>
+</header>
+
+<main>
+    <section class="introduction">
+        <h1>About the Author - Aman Talikoti</h1>
+        <p>Welcome to Blog Manager, a dynamic and interactive blogging platform developed by Aman Talikoti. Hosted on PythonAnywhere and built using Flask and MySQL, Blog Manager provides a seamless experience for users to create, manage, and share their blogs effortlessly. Designed for social blogging enthusiasts, writers, and creators, it combines the power of secure user authentication, personalized dashboards, and an intuitive admin panel for efficient content moderation.</p>
+        <p>Blog Manager offers features like writing blogs, liking or unliking posts, and collaborating with a community in a responsive and engaging environment. As a Python Flask developer, Aman Talikoti created this platform to empower users to explore their creativity while leveraging modern web development technologies. With PythonAnywhere hosting, the platform ensures fast, reliable performance for both beginners and experienced bloggers. Whether you're a writer looking for a social media-style blog manager or a tech enthusiast interested in Flask and MySQL integration, Blog Manager offers a user-friendly solution tailored to your needs.</p>
+                <ul>
+                <li><a href="https://www.linkedin.com/in/aman-talikoti-905b33231/" target="_blank">LinkedIn</a></li>
+                <li><a href="https://github.com/GWaman2007" target="_blank">GitHub</a></li>
+            </ul>
+    </section>
+</main>
+    <footer style="background-color: #333; color: white; padding: 30px 20px; text-align: center;">
+    <div style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+        <p>&copy; 2025 Blog Manager by Aman Talikoti. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

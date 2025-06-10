@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your account on AmanWeb. Join our community, set up your profile, and start exploring the features and benefits we offer.">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Calibri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .button-container a {
+            margin-left: 10px;
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a.logout-button {
+            background-color: #dc3545;
+        }
+
+        /* Same styles for the Register button */
+        .btn {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #6c757d; /* Grey hover effect */
+        }
+
+        .main {
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #007bff;
+        }
+
+        .form {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            max-width: 800px;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Flash Messages */
+        .flash-messages {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .flash {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name">Blog Manager</div>
+        <div class="button-container">
+            <a href="{{ url_for('index') }}" class="btn">Go to Home</a>
+        </div>
+    </header>
+
+    <div class="main">
+        <h1>Register</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="form">
+            <h2>Create an Account</h2>
+            <form method="POST" action="{{ url_for('register') }}">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
+
+                <!-- Register button, now with grey hover effect like others -->
+                <button type="submit" class="btn">Register</button>
+            </form>
+            <p>Already have an account? <a href="{{ url_for('login') }}" class="btn">Login here</a></p>
+        </div>
+    </div>
+        <a href="{{ url_for('author_aman') }}" class="btn">About Aman Talikoti</a>
+    <footer style="background-color: #333; color: white; padding: 30px 20px; text-align: center;">
+    <div style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+        <p>&copy; 2025 Blog Manager by Aman Talikoti. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

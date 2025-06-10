@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Calibri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .button-container a {
+            margin-left: 10px;
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a.logout-button {
+            background-color: #dc3545;
+        }
+
+        /* Same styles for the Error Page button */
+        .btn {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #6c757d; /* Grey hover effect */
+        }
+
+        .error-page {
+            text-align: center;
+            padding: 50px;
+            margin-top: 100px;
+        }
+
+        .error-page h1 {
+            font-size: 5rem;
+            color: #007bff;
+        }
+
+        .error-page h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .error-page p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Flash Messages */
+        .flash-messages {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .flash {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name">Blog Manager</div>
+        <div class="button-container">
+            <a href="{{ url_for('index') }}" class="btn">Go to Home</a>
+        </div>
+    </header>
+
+    <div class="error-page">
+        <h1>404</h1>
+        <h2>Oops! Page Not Found</h2>
+        <p>We can't find the page you're looking for.</p>
+        <a href="{{ url_for('index') }}" class="btn">Go Home</a>
+    </div>
+    <a href="{{ url_for('author_aman') }}" class="btn">About Aman Talikoti</a>
+    <footer style="background-color: #333; color: white; padding: 30px 20px; text-align: center;">
+    <div style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+        <p>&copy; 2025 Blog Manager by Aman Talikoti. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

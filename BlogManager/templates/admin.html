@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Calibri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .button-container a {
+            margin-left: 10px;
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .button-container a.logout-button {
+            background-color: #dc3545;
+        }
+
+        .main {
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #007bff;
+        }
+
+        .admin-actions {
+            margin-top: 20px;
+        }
+
+        .admin-actions h2 {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .admin-actions form {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-actions label {
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .admin-actions select {
+            padding: 5px 10px;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .admin-actions button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .admin-actions button:hover {
+            opacity: 0.9;
+        }
+
+        .flash-messages {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .flash {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name">Admin Panel</div>
+        <div class="button-container">
+            <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+            <a href="{{ url_for('index') }}" class="btn">Go to Home</a>
+            <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </div>
+    </header>
+
+    <div class="main">
+        <h1>Welcome to the Admin Panel, {{ session['username'] }}</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Admin actions -->
+        <div class="admin-actions">
+            <h2>Manage Users</h2>
+            <form method="POST" action="{{ url_for('admin') }}">
+                <label for="username">Select a User:</label>
+                <select name="username" id="username">
+                    {% for user in users %}
+                        <option value="{{ user[0] }}">{{ user[1] }}</option> <!-- user[0] = user_id, user[1] = username -->
+                    {% endfor %}
+                </select>
+                <button type="submit" name="delete_user" class="btn">Delete User</button>
+                <button type="submit" name="make_admin" class="btn">Make Admin</button>
+                <button type="submit" name="remove_admin" class="btn">Remove Admin</button>
+            </form>
+
+            <h2>Manage Blogs</h2>
+            <form method="POST" action="{{ url_for('admin') }}">
+                <label for="blog">Select a Blog:</label>
+                <select name="blog" id="blog">
+                    {% for blog in blogs %}
+                        <option value="{{ blog[0] }}">{{ blog[1] }}</option> <!-- blog[0] = blog_id, blog[1] = blog_title -->
+                    {% endfor %}
+                </select>
+                <button type="submit" name="delete_blog" class="btn">Delete Blog</button>
+            </form>
+
+            <!-- Additional Admin actions can be added here -->
+        </div>
+    </div>
+        <a href="{{ url_for('author_aman') }}" class="btn">About Aman Talikoti</a>
+    <footer style="background-color: #333; color: white; padding: 30px 20px; text-align: center;">
+    <div style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+        <p>&copy; 2025 Blog Manager by Aman Talikoti. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

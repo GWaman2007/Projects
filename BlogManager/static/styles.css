@@ -1,0 +1,337 @@
+/* General body styling */
+body {
+    background-color: #ffffff; /* Iron */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #28425c; /* Rhino */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #28425c; /* Rhino */
+    color: #fff;
+}
+
+.site-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.welcome-message, .notice {
+    background-color: #f0f0f0;
+    color: #28425c; /* Rhino */
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notice {
+    background-color: #ffe6b3;
+}
+
+.btn, .btn-like, .btn-unlike, .btn-delete {
+    background-color: #e48a14; /* Golden Bell */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover, .btn-like:hover, .btn-unlike:hover, .btn-delete:hover {
+    background-color: #667991; /* Lynch */
+}
+
+.main {
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.latest-blogs {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.blog-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #28425c; /* Rhino */
+    margin-bottom: 10px;
+}
+
+.blog-author, .blog-time {
+    font-size: 14px;
+    color: #667991; /* Lynch */
+    margin-bottom: 10px;
+}
+
+.blog-content {
+    color: #28425c; /* Rhino */
+    margin-bottom: 10px;
+    white-space: pre-line; /* Preserve new lines and multiple spaces */
+}
+
+.blog-likes-dislikes {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+/* Like and Unlike button styling */
+.btn-like, .btn-unlike {
+    background-color: #e48a14; /* Golden Bell */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-like:hover, .btn-unlike:hover {
+    background-color: #667991; /* Lynch */
+}
+}
+/* Flash message container */
+.flash-messages {
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Base flash message styling */
+.flash {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+background-color: lightblue; /* Light green background */
+    color: darkblue; /* White text for better contrast */
+    border: 1px solid lightblue; /* Light green border */
+    display: inline-block;
+    width: 100%;
+}
+
+/* Success message styling */
+.flash.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Light green border */
+}
+
+/* Error message styling */
+.flash.error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Light red border */
+}
+
+/* Example of a different background color for a neutral message */
+.flash.info {
+    background-color: #d1ecf1; /* Light blue background */
+    color: #0c5460; /* Dark blue text */
+    border: 1px solid #bee5eb; /* Light blue border */
+}
+
+
+
+.logout-button {
+    background-color: #e48a14; /* Golden Bell */
+    color: #ffffff; /* White text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make text bold */
+}
+
+.logout-button:hover {
+    background-color: #4d5b6e; /* Darker shade of Lynch */
+}
+
+.login-link, .register-link {
+    background-color: #28425c; /* Rhino */
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.login-link:hover, .register-link:hover {
+    background-color: #667991; /* Lynch */
+}
+
+.login p {
+    margin-top: 20px;
+}
+
+.login a {
+    color: #28425c; /* Rhino */
+    text-decoration: none;
+}
+
+/* Register specific styles */
+.register h1, .login h1 {
+    color: #28425c; /* Rhino */
+}
+
+.register form, .login form,.form-container ,.error-page {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.register input[type="text"], .register input[type="password"], .login input[type="text"], .login input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register button[type="submit"], .login button[type="submit"], .error-page .btn {
+    padding: 10px 20px;
+    background-color: #28425c; /* Rhino */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.register button[type="submit"]:hover, .login button[type="submit"]:hover, .error-page .btn:hover {
+    background-color: #667991; /* Lynch */
+}
+
+.register p, .login p {
+    margin-top: 20px;
+}
+
+.register a, .login a {
+    color: #28425c; /* Rhino */
+    text-decoration: none;
+}
+
+/* Error page styles */
+.error-page {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.error-page h1 {
+    font-size: 100px;
+    margin: 0;
+}
+
+.error-page h2 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.error-page p {
+    font-size: 18px;
+}
+
+.error-page .btn {
+    background-color: #28425c; /* Rhino */
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.error-page .btn:hover {
+    background-color: #667991; /* Lynch */
+}
+.blog-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.blog-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.blog-title {
+    font-size: 1.2em;
+}
+
+.blog-author {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.blog-content {
+    margin-bottom: 10px;
+}
+
+.blog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-delete {
+    background-color: #e48a14;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #d9780c;
+}

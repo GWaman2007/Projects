@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Dashboard</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+		<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+		<style>
+			/* General Styling */
+			body {
+			font-family: 'Calibri', sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f9;
+			color: #333;
+			}
+			header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			}
+			.site-name {
+			font-size: 1.5rem;
+			font-weight: bold;
+			}
+			.button-container a {
+			margin-left: 10px;
+			text-decoration: none;
+			padding: 8px 12px;
+			background-color: #007bff;
+			color: #fff;
+			border-radius: 5px;
+			font-size: 0.9rem;
+			}
+			.button-container a.logout-button {
+			background-color: #dc3545;
+			}
+			.main {
+			padding: 20px;
+			}
+			h1, h2 {
+			color: #007bff;
+			}
+			.form, .latest-blogs {
+			margin-top: 20px;
+			padding: 15px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			background-color: #fff;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+			label {
+			font-size: 1rem;
+			font-weight: bold;
+			}
+			/* Input and Textarea Styling */
+			input, textarea {
+			width: 100%;
+			max-width: 800px;
+			padding: 8px;
+			margin: 10px 0;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-sizing: border-box;
+			font-size: 1rem;
+			resize: vertical;
+			}
+			@media (max-width: 768px) {
+			input, textarea {
+			font-size: 0.9rem;
+			}
+			}
+			button {
+			padding: 10px 15px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			}
+			button:hover {
+			opacity: 0.9;
+			}
+			.btn-delete {
+			background-color: #dc3545;
+			}
+			.btn-delete:hover {
+			opacity: 0.9;
+			}
+			/* Blog Entry Styling */
+			.blog {
+			margin-top: 15px;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			background-color: #fff;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+			/* Hover Effect on Blog */
+			.blog:hover {
+			transform: translateY(-5px); /* Slight upward movement */
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+			}
+			.blog-header {
+			font-weight: bold;
+			cursor: pointer;
+			}
+			.blog-content {
+			margin-top: 10px;
+			display: none;
+			}
+			/* Flash Messages Styling */
+			.flash-messages {
+			margin: 20px 0;
+			padding: 15px;
+			border-radius: 5px;
+			background-color: #fff;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+			.flash {
+			margin-bottom: 10px;
+			padding: 10px;
+			border-radius: 5px;
+			}
+			.flash.success {
+			background-color: #d4edda;
+			color: #155724;
+			border: 1px solid #c3e6cb;
+			}
+			.flash.error {
+			background-color: #f8d7da;
+			color: #721c24;
+			border: 1px solid #f5c6cb;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="site-name">Blog Manager</div>
+			<div class="button-container">
+				<a href="{{ url_for('index') }}" class="btn">Go to Home</a>
+				{% if session.get('is_admin') %}
+				<a href="{{ url_for('admin') }}" class="btn">Admin Panel</a> <!-- Admin Panel button -->
+				{% endif %}
+				<a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+			</div>
+		</header>
+		<div class="main">
+			<h1>Welcome to Your Dashboard, {{ session['username'] }}</h1>
+			<!-- Flash messages -->
+			{% with messages = get_flashed_messages(with_categories=True) %}
+			{% if messages %}
+			<div class="flash-messages">
+				{% for category, message in messages %}
+				<div class="flash {{ category }}">{{ message }}</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+			{% endwith %}
+			<div class="form">
+				<h2>Write a New Blog</h2>
+				<form method="POST" action="{{ url_for('dashboard') }}">
+					<label for="title">Title:</label><br>
+					<input type="text" id="title" name="title" placeholder="Enter your blog title" required>
+					<br>
+					<label for="content">Content:</label>
+					<br>
+					<textarea id="content" name="content" rows="5" placeholder="Write your blog content here..." required></textarea>
+					<br><button type="submit">Submit</button>
+				</form>
+			</div>
+			<div class="latest-blogs">
+				<h2>Your Blogs</h2>
+				{% if blogs %}
+				{% for blog in blogs %}
+				<div class="blog" data-blog-id="{{ blog[0] }}">
+					<div class="blog-header">
+						<div class="blog-title">{{ blog[1] }}</div>
+						<div class="blog-author">Author: {{ blog[3] }}</div>
+					</div>
+					<div class="blog-content">
+						<p>{{ blog[2] }}</p>
+						<div class="blog-time">Date and time: {{ blog[5] }}</div>
+						<div align="left">Likes: {{ blog[4] }}</div>
+						<div class="blog-likes-dislikes">
+							<form method="POST" action="{{ url_for('dashboard') }}" style="display:inline;">
+								<input type="hidden" name="delete" value="{{ blog[0] }}">
+								<button type="submit" class="btn-delete">Delete</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
+				<p>No blogs found.</p>
+				{% endif %}
+			</div>
+		</div>
+		<script>
+			document.querySelectorAll('.blog-header').forEach(header => {
+			    header.addEventListener('click', function() {
+			        const blogContent = this.nextElementSibling;
+			        blogContent.style.display = blogContent.style.display === 'none' ? 'block' : 'none';
+			    });
+			});
+		</script>
+		<a href="{{ url_for('author_aman') }}" class="btn">About Aman Talikoti</a>
+		<footer style="background-color: #333; color: white; padding: 30px 20px; text-align: center;">
+			<div style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+				<p>&copy; 2025 Blog Manager by Aman Talikoti. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</body>
+</html>
