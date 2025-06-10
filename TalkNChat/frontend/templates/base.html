@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="CzFSOoHz9ZFSeFWANxmH3Q4_1GTUq9yR0Z4ZfODURXQ" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TalkNChat{% endblock %}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/" style="color: white; text-decoration: none;">TalkNChat</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            {% if username %}
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout ({{ username }})</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+<style>
+  .flash-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+  .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+  .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+</style>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-message {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>TalkNChat. All rights reserved. 2025.</p>
+    </footer>
+</body>
+</html>

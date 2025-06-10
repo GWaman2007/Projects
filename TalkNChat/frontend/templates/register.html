@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Register - TalkNChat{% endblock %}
+
+{% block content %}
+    <h2>Register</h2>
+    <form action="/register" method="post">
+        <label>Choose a Username:</label>
+        <input type="text" name="username" required>
+
+        <label>Create a Password:</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Register</button>
+    </form>
+    <p>Already registered? <a href="/login">Login here</a></p>
+{% endblock %}

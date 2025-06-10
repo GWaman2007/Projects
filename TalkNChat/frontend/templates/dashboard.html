@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Chat - TalkNChat{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Chat</h2>
+    <div id="sidebar">
+        <h3>Contacts</h3>
+        <input type="text" id="searchInput" placeholder="Search users..." oninput="searchUsers()">
+        <div id="contacts"></div>
+    </div>
+    <div id="chat-container">
+        <input type="text" id="recipientInput" placeholder="Recipient username">
+        <div id="chat-box">
+            <div id="messages"></div>
+        </div>
+        <textarea id="messageInput" placeholder="Type a message..." rows="3"></textarea> <!-- Use textarea for multiline input -->
+        <input type="file" id="fileInput">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script src="/static/script.js"></script>
+{% endblock %}
