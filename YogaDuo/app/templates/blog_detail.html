@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block additional_keywords %}, {{ blog.keywords }}{% endblock %}
+
+{% block content %}
+<div class="blog-content">
+    <h1>{{ blog.title }}</h1>
+    <p>{{ blog.content | safe}}</p>
+    <p><strong>Category:</strong> {{ blog.category }}</p>
+    <p><strong>Keywords:</strong> {{ blog.keywords }}</p>
+</div>
+{% endblock %}

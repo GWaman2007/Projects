@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block additional_keywords %}, Yoga Home, Yoga Welcome, Yoga Introduction{% endblock %}
+{% block content %}
+<p>Welcome to YogaDuo! We are a yoga website that offers blogs on yoga and diets related to it. Our classes are perfect for you. Sign up today and start your yoga journey with us!</p>
+<!-- Add a button to register if not logged in -->
+{% if not session.user_id %}
+ <p> Not registered yet? <a href="/register" class="btn cta">Get Started</a></p>
+{% endif %}
+<br>
+<!-- Toggle between Trending and Latest Blogs -->
+<div class="blog-toggle">
+    <button id="show-trending" class="btn">Trending Blogs</button>
+    <button id="show-latest" class="btn">Latest Blogs</button>
+</div>
+
+<!-- Trending Blogs Section -->
+<div id="trending-blogs" class="blog-section">
+    {% for blog in trending_blogs %}
+    <div class="blog-card">
+        <h3>{{ blog.title }}</h3>
+        {% if blog.image %}
+        <img src="{{ blog.image }}" alt="{{ blog.title }}" class="blog-image">
+        {% endif %}
+        <a href="/blog/{{ blog.id }}" class="btn">Read More</a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Latest Blogs Section -->
+<div id="latest-blogs" class="blog-section" style="display: none;">
+    {% for blog in latest_blogs %}
+    <div class="blog-card">
+        <h3>{{ blog.title }}</h3>
+        {% if blog.image %}
+        <img src="{{ blog.image }}" alt="{{ blog.title }}" class="blog-image">
+        {% endif %}
+        <a href="/blog/{{ blog.id }}" class="btn">Read More</a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Load More Button -->
+<button id="load-more" class="btn">Load More Blogs</button>
+
+<script>
+    document.getElementById('show-trending').addEventListener('click', function() {
+        document.getElementById('trending-blogs').style.display = 'block';
+        document.getElementById('latest-blogs').style.display = 'none';
+    });
+
+    document.getElementById('show-latest').addEventListener('click', function() {
+        document.getElementById('trending-blogs').style.display = 'none';
+        document.getElementById('latest-blogs').style.display = 'block';
+    });
+
+    document.getElementById('load-more').addEventListener('click', function() {
+        // Implement AJAX call to load more blogs
+    });
+</script>
+{% endblock %}

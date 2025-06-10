@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block additional_keywords %}, Yoga Dashboard, Blog Dashboard, YogaDuo Dashboard{% endblock %}
+{% block content %}
+<h2>Create a Blog</h2>
+<form method="POST" id="blogForm" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Title" required>
+    <div id="blogElements"></div>
+    <button type="button" onclick="addElement('subtitle')">Add Subtitle</button>
+    <button type="button" onclick="addElement('paragraph')">Add Paragraph</button>
+    <button type="button" onclick="addElement('image')">Add Image</button>
+    <input type="text" name="category" placeholder="Category" required>
+    <input type="text" name="keywords" placeholder="Keywords" required>
+    <button type="submit" class="btn">Publish</button>
+</form>
+
+<h2>All Blogs</h2>
+{% for blog in blogs %}
+<form method="POST" action="/delete_blog/{{ blog[0] }}">
+    <h3><a href="/blog/{{ blog[0] }}" class="blog-link">{{ blog[1] }}</a></h3>
+    <p><strong>Category:</strong> {{ blog[3] }}</p>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+{% endfor %}
+{% endblock %}

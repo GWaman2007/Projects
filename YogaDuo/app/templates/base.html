@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../static/js/blog_script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="CzFSOoHz9ZFSeFWANxmH3Q4_1GTUq9yR0Z4ZfODURXQ" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YogaDuo</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <meta name="keywords" content="YogaDuo, YogaDuo, Pythonanywhere, Aman Talikoti, by AMAN TALIKOTI, Yoga Blogs, Yoga Diets, Yoga Classes, Yoga Poses, Yoga Exercises, Yoga Tips{% block additional_keywords %}{% endblock %}">
+    <meta name="description" content="YogaDuo offers blogs on yoga and diets, and provides yoga classes to start your yoga journey.">
+    <meta property="og:title" content="YogaDuo">
+    <meta property="og:description" content="YogaDuo offers blogs on yoga and diets, and provides yoga classes to start your yoga journey.">
+    <meta property="og:image" content="/app/static/images/og-image.jpg">
+    <meta property="og:url" content="{{ url_for('home.index', _external=True) }}">
+    {% block meta %}{% endblock %}
+</head>
+<body>
+    <nav class="header-pc">
+    <div class="header">
+        <a href="/" class="app-name">YogaDuo</a>
+        <a href="/about" class="header-button">About</a>
+        <a href="/contact" class="header-button">Contact</a>
+        {% if session.user_id %}
+            {% if session.is_admin %}
+                <a href="/admin" class="header-button">Dashboard</a>
+            {% endif %}
+            <a href="/logout" class="header-button">Logout</a>
+        {% else %}
+            <a href="/login" class="header-button">Login</a>
+            <a href="/register" class="header-button">Register</a>
+        {% endif %}
+        <!-- Dark Mode Toggle -->
+        <div class="dark-mode-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <label for="dark-mode-toggle" class="toggle-label">
+                <span class="toggle-ball"></span>
+            </label>
+        </div>
+    </div>
+</nav>
+
+    <nav class="header-phone">
+    <div class="header">
+        <a href="/" class="app-name">YogaDuo</a>
+        <button class="menu-toggle">☰</button>
+    </div>
+    <div class="menu">
+        <a href="/about" class="header-button">About</a>
+        <a href="/contact" class="header-button">Contact</a>
+        {% if session.user_id %}
+            {% if session.is_admin %}
+                <a href="/admin" class="header-button">Dashboard</a>
+            {% endif %}
+            <a href="/logout" class="header-button">Logout</a>
+        {% else %}
+            <a href="/login" class="header-button">Login</a>
+            <a href="/register" class="header-button">Register</a>
+        {% endif %}
+
+        <!-- Dark Mode Toggle for Mobile -->
+        <div class="dark-mode-switch">
+            <input type="checkbox" id="dark-mode-toggle-mobile">
+            <label for="dark-mode-toggle-mobile" class="toggle-label">
+                <span class="toggle-ball"></span>
+            </label>
+        </div>
+    </div>
+</nav>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="content">
+        <h1>YogaDuo</h1>
+        {% block content %}{% endblock %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 YogaDuo. All rights reserved.</p>
+    </div>
+
+</body>
+</html>

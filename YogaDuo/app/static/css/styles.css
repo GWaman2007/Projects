@@ -1,0 +1,708 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFF7E6; /* Light cream background */
+    color: #333; /* Charcoal gray text */
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+/* Default light mode styles (already defined in your CSS) */
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212; /* Dark background */
+    color: #f0f0f0; /* Light text */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition */
+}
+
+/* Dark mode styles for header and nav */
+body.dark-mode .header,
+body.dark-mode nav {
+    background: linear-gradient(45deg, #444, #666); /* Subtle dark gradient */
+    background-size: 200% 200%; /* Enlarged for smooth animation */
+    animation: gradient-shift 5s ease infinite; /* Add animation for dark mode */
+    color: #f0f0f0; /* Light text */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for dark mode */
+    transition: background 0.5s ease, color 0.5s ease, box-shadow 0.3s ease-in-out; /* Smooth transitions */
+}
+
+/* Dark mode footer styles */
+body.dark-mode .footer {
+    text-align: center;
+    padding: 1em;
+    color: #FFF7E6; /* Light cream text */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(45deg, #444, #666); /* Subtle dark gradient for dark mode */
+    background-size: 200% 200%; /* Enlarged for smooth gradient animation */
+    animation: gradient-shift 5s ease infinite; /* Smooth gradient animation */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Added shadow for depth */
+}
+
+
+/* Dark mode links inside header and nav */
+body.dark-mode .header a,
+body.dark-mode nav a {
+    color: #f0f0f0; /* Light text for links */
+}
+
+body.dark-mode .header a:hover,
+body.dark-mode nav a:hover {
+    color: #FFDEE3; /* Softer hover effect for text */
+    text-decoration: underline; /* Maintain underline hover */
+}
+
+/* Dark mode for buttons inside header */
+body.dark-mode .header-button, body.dark-mode .blog-link,body.dark-mode .blog-content {
+    background: none;
+    color: #f0f0f0; /* Light text for buttons */
+    border: 2px solid #888; /* Softened border for dark mode */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.5s ease; /* Smooth transitions */
+}
+
+body.dark-mode .header-button:hover {
+    background: rgba(255, 255, 255, 0.2); /* Subtle translucent background */
+    color: #f0f0f0; /* Maintain text color */
+    border-color: #FFF7E6; /* Highlight border */
+    transform: translateY(-3px); /* Add lift effect */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Glow effect */
+}
+
+
+/* Dark Mode Switch (Toggle Button) */
+.dark-mode-switch .toggle-label {
+    display: block;
+    position: relative;
+    width: 60px; /* Increased width for better spacing */
+    height: 30px; /* Increased height for better alignment */
+    background-color: #ccc; /* Default background for light mode */
+    border-radius: 30px; /* Fully rounded switch */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hide the Checkbox */
+.dark-mode-switch input[type="checkbox"] {
+    display: none; /* Hide the checkbox */
+}
+
+/* Toggle Ball */
+.dark-mode-switch .toggle-label .toggle-ball {
+    position: absolute;
+    top: 2px; /* Align vertically */
+    left: 2px; /* Default position (light mode) */
+    width: 26px;
+    height: 26px;
+    background-color: white; /* Always white, regardless of theme */
+    border-radius: 50%; /* Fully circular */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 2; /* Place ball above the background */
+    display: flex; /* Allow icons to be centered inside the ball */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Sun and Moon Icons Inside the Toggle Ball */
+.dark-mode-switch .toggle-label .toggle-ball::before {
+    content: '';
+    position: absolute;
+    width: 16px; /* Default size of sun icon */
+    height: 16px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 3; /* Place icons above the ball */
+    transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* Sun Icon (default in light mode) */
+.dark-mode-switch .toggle-label .toggle-ball::before {
+    background-image: url('/static/images/icons/sun.svg'); /* Path to sun icon */
+    opacity: 1; /* Sun is visible in light mode */
+    width: 16px; /* Default size */
+    height: 16px; /* Default size */
+}
+
+/* Moon Icon (when in dark mode) */
+.dark-mode-switch input[type="checkbox"]:checked + .toggle-label .toggle-ball::before {
+    background-image: url('/static/images/icons/moon.svg'); /* Path to moon icon */
+    opacity: 1; /* Moon is visible in dark mode */
+    width: 32px; /* 1.5x size increase (16px * 1.5 = 24px) */
+    height: 32px; /* 1.5x size increase */
+}
+
+/* Dark Mode Active State */
+.dark-mode-switch input[type="checkbox"]:checked + .toggle-label {
+    background-color: #6247AA; /* Indigo background for dark mode */
+}
+
+/* Move Toggle Ball (Dark Mode) */
+.dark-mode-switch input[type="checkbox"]:checked + .toggle-label .toggle-ball {
+    transform: translateX(30px); /* Move the ball to the right in dark mode */
+    background-color: white; /* Ensure the ball stays white in dark mode */
+}
+
+
+
+
+
+
+/* Dark mode styles for forms */
+body.dark-mode form {
+    background-color: #1e1e1e; /* Darker form background */
+    color: #f0f0f0; /* Light text for dark mode */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Subtle white glow */
+    transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease; /* Smooth transitions */
+}
+
+/* Form inputs in dark mode */
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode textarea {
+    background-color: #333; /* Darker input fields */
+    color: #f0f0f0; /* Light text */
+    border: 1px solid #555; /* Softer border for inputs */
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; /* Smooth transitions */
+}
+
+/* Input hover effects in dark mode */
+body.dark-mode input[type="text"]:hover,
+body.dark-mode input[type="email"]:hover,
+body.dark-mode input[type="password"]:hover,
+body.dark-mode textarea:hover {
+    background-color: #444; /* Slightly lighter background on hover */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle white glow */
+}
+
+/* Input focus effects in dark mode */
+body.dark-mode input[type="text"]:focus,
+body.dark-mode input[type="email"]:focus,
+body.dark-mode input[type="password"]:focus,
+body.dark-mode textarea:focus {
+    border-color: #777; /* Highlighted border */
+    box-shadow: 0 0 10px rgba(98, 71, 170, 0.8); /* Indigo glow */
+    outline: none; /* Remove default outline */
+}
+
+/* Buttons inside forms in dark mode */
+/* Buttons in dark mode */
+body.dark-mode button,
+body.dark-mode .btn {
+    background: linear-gradient(45deg, #444, #666); /* Adjusted gradient for dark mode */
+    background-size: 200% 200%;
+    animation: gradient-shift 5s ease infinite; /* Infinite gradient animation */
+    color: #FFF7E6; /* Light cream text for dark mode */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transitions */
+}
+
+/* Hover effect in dark mode */
+body.dark-mode button:hover,
+body.dark-mode .btn:hover {
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle glow */
+}
+
+
+
+.flash-message {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 1; /* Fully visible */
+    transition: opacity 1s ease-out; /* Smooth fade-out transition */
+}
+
+/* This class is added by JavaScript to hide the message */
+.flash-hidden {
+    opacity: 0; /* Completely hidden */
+    pointer-events: none; /* Prevent interactions while fading out */
+}
+
+/* Dynamic categories for flash types */
+.flash-success {
+    background-color: #4CAF50; /* Green */
+}
+
+.flash-error {
+    background-color: #F44336; /* Red */
+}
+
+
+
+nav {
+    background-color: #FF9F68; /* Peach Orange background */
+    padding: 1em;
+    text-align: center;
+}
+
+nav a {
+    color: #FFF7E6; /* Light cream text */
+    margin: 0 1em;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    padding: 2em;
+}
+
+h1, h2 {
+    color: #6247AA; /* Deep Indigo color */
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+form {
+    background-color: #FFF7E6; /* Light cream background */
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2em auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 1em;
+    margin: 0.5em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover, textarea:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* General button styles with gradient animation */
+button, .btn {
+    background: linear-gradient(45deg, #FF9F68, #6247AA); /* Gradient background */
+    background-size: 200% 200%; /* Enlarged for smooth animation */
+    animation: gradient-shift 5s ease infinite; /* Infinite gradient animation */
+    color: #FFF7E6; /* Light cream text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition for lift */
+}
+
+/* Button hover effect with lift */
+button:hover, .btn:hover {
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Animated gradient keyframes */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Disabled button styles */
+button:disabled, .btn:disabled {
+    background: linear-gradient(45deg, #ccc, #999); /* Neutral gradient for disabled buttons */
+    color: #666; /* Muted text color */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+
+
+/* Focus styles for better accessibility */
+button:focus, .btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(98, 71, 170, 0.8); /* Indigo glow */
+}
+
+.blog-link {
+    display: block;
+    padding: 1em;
+    background-color: #FFF7E6; /* Light cream background */
+    border-radius: 5px;
+    margin: 1em 0;
+    text-decoration: none;
+    color: #6247AA; /* Deep Indigo color */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.2em;
+}
+
+.blog-link:hover {
+    background-color: #ffffff; /* Solid white background on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.blog-content {
+    background-color: #FFF7E6; /* Light cream background */
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 2em 0;
+}
+
+.blog-content h2 {
+    color: #6247AA; /* Deep Indigo color */
+}
+
+.blog-content p {
+    line-height: 1.6;
+    font-size: 1.2em;
+}
+
+/* Shared styles for header and nav */
+.header, nav {
+    background: linear-gradient(45deg, #FF9F68, #6247AA); /* Unified gradient background */
+    background-size: 200% 200%; /* Enlarged for smooth gradient animation */
+    animation: gradient-shift 5s ease infinite; /* Shared animation for a consistent look */
+    color: #FFF7E6; /* Light cream text */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em; /* Shared padding for consistent spacing */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for both elements */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for scrolling effects */
+}
+
+/* Adjust styles for links in header and nav */
+.header a, nav a {
+    color: #FFF7E6; /* Light cream text for links */
+    margin: 0 1em;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth link hover effect */
+}
+
+.header a:hover, nav a:hover {
+    color: #FFDEE3; /* Slightly lighter text color on hover */
+    text-decoration: underline;
+}
+
+/* Unified gradient animation for both elements */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* Buttons inside the header */
+.header-button {
+    background: none; /* Remove individual button backgrounds */
+    color: #FFF7E6; /* Inherit text color */
+    text-decoration: none !important;
+    border: 2px solid #FFF7E6; /* Border to visually separate from gradient */
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.5s ease, background 0.5s ease; /* Smooth hover transition */
+}
+
+/* Button hover effect */
+.header-button:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slight translucent white background */
+    color: #FFF7E6; /* Keep text color */
+    border-color: #FFF7E6; /* Ensure border stays consistent */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle glowing effect */
+}
+
+
+.footer {
+    text-align: center;
+    padding: 1em;
+    color: #FFF7E6; /* Light cream text */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(45deg, #FF9F68, #6247AA); /* Unified gradient background */
+    background-size: 200% 200%; /* Enlarged for smooth gradient animation */
+    animation: gradient-shift 5s ease infinite; /* Shared animation for a consistent look */
+}
+
+.app-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+.app-name:hover {
+    text-decoration: none !important;
+}
+
+.cta {
+    background-color: #B983FF; /* Soft Lavender background */
+    color: #FFFFFF; /* Charcoal gray text */
+    font-weight: bold;
+    padding: 1em 2em;
+    border-radius: 10px;
+    text-transform: uppercase;
+    margin-top: 2em;
+    font-size: 1.2em;
+}
+
+.cta:hover {
+    background-color: #9A6DCC; /* Darker Lavender on hover */
+}
+
+p {
+    font-size: 1.5em;
+}
+
+.header-pc {
+    display: flex;
+}
+
+.header-phone {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Hide desktop header, show mobile header */
+    .header-pc {
+        display: none;
+    }
+
+    .header-phone {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(45deg, #FF9F68, #6247AA); /* Gradient background */
+        background-size: 200% 200%; /* Enlarged for animation */
+        animation: gradient-shift 5s ease infinite; /* Same animation as desktop */
+        padding: 1em;
+        flex-wrap: wrap;
+        width: 100%;
+        color: #FFF7E6; /* Light cream text */
+    }
+
+    /* Menu toggle for mobile header */
+    .header-phone .menu-toggle {
+        flex: 1;
+        text-align: right;
+        background: none;
+        border: none;
+        color: #FFF7E6; /* Matches header text color */
+        font-size: 1.5em;
+        cursor: pointer;
+        transition: transform 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+    }
+
+    .header-phone .menu-toggle:hover {
+        transform: scale(1.1); /* Slight zoom effect */
+        color: #FFDEE3; /* Softer hover feedback */
+    }
+
+    .header-phone .app-name {
+        flex: 1;
+        text-align: left;
+    }
+    .header-phone.scrolled {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow appears on scroll */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition */
+    }
+
+    /* Mobile menu (initially hidden) */
+    .menu {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -100%; /* Off-screen */
+        width: 80%;
+        height: 100%;
+        background: linear-gradient(45deg, #FF9F68, #6247AA); /* Gradient matches header */
+        background-size: 200% 200%; /* Animation-ready */
+        animation: gradient-shift 5s ease infinite; /* Gradient movement */
+        transition: left 0.5s ease; /* Smooth slide-in/out */
+        padding-top: 2em;
+        z-index: 1000;
+    }
+
+    /* Active menu (slides in) */
+    .menu.active {
+        left: 0;
+    }
+
+    /* Mobile menu links */
+    .menu a {
+        padding: 1em;
+        text-align: center;
+        font-size: 1.2em;
+        text-decoration: none;
+        color: #FFF7E6; /* Light cream text */
+        transition: background 0.3s ease, color 0.3s ease; /* Smooth hover transition */
+    }
+
+    .menu a:hover {
+        background: rgba(255, 255, 255, 0.2); /* Subtle translucent hover effect */
+        color: #FFDEE3; /* Softer text on hover */
+    }
+
+    /* Dark mode styles for mobile */
+    body.dark-mode .header-phone {
+        background: linear-gradient(45deg, #333, #444); /* Darker gradient in dark mode */
+        color: #f0f0f0;
+    }
+
+    body.dark-mode .menu {
+        background: linear-gradient(45deg, #333, #444); /* Dark gradient for menu */
+    }
+
+    body.dark-mode .menu a {
+        color: #f0f0f0; /* Light text for links */
+    }
+
+    /* Responsive typography for mobile */
+    .content, h3, p, a, input, button, .cta, .blog-content p, .blog-content a, .blog-content button {
+        font-size: 4vw; /* Scalable font size for smaller screens */
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    /* Mobile menu dark mode switch */
+    .dark-mode-switch {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1em; /* Space below the menu items */
+    }
+
+    .dark-mode-switch input[type="checkbox"] {
+        display: none; /* Hide the checkbox */
+    }
+
+    .dark-mode-switch .toggle-label {
+        display: block;
+        position: relative;
+        width: 50px;
+        height: 25px;
+        background-color: #ccc;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .dark-mode-switch .toggle-label:hover {
+        background-color: #aaa;
+    }
+
+    .dark-mode-switch .toggle-label .toggle-ball {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 21px;
+        height: 21px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    /* Toggle ball movement on activation */
+    .dark-mode-switch input[type="checkbox"]:checked + .toggle-label {
+        background-color: #6247AA; /* Indigo color in dark mode */
+    }
+
+    .dark-mode-switch input[type="checkbox"]:checked + .toggle-label .toggle-ball {
+        transform: translateX(25px);
+    }
+}
+
+
+.header-phone .menu-toggle.active + .menu {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.header-phone .menu.active {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.header-phone .menu {
+    display: none;
+}
+
+.menu.active {
+    left: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.blog-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.blog-image {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 1em;
+}

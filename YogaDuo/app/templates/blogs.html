@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+<script src="/app/static/js/blog_script.js"></script>
+
+{% block content %}
+<h2>Blogs</h2>
+<p>Here you can find all the blogs related to yoga and diets.</p>
+{% for blog in blogs %}
+    <h3><a href="/blog/{{ blog[0] }}" class="blog-link">{{ blog[1] }}</h3></a>
+{% endfor %}
+{% endblock %}

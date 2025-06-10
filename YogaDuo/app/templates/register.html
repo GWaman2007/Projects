@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block additional_keywords %}, Yoga Register, User Registration, YogaDuo Register{% endblock %}
+{% block content %}
+<form method="POST">
+    <h2>Register</h2>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit" class="btn">Register</button>
+    <p>Already registered? <a href="/login">Login here</a></p>
+</form>
+{% endblock %}
