@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Aman's Tech and Gaming Guide{% endblock %}
+
+{% block meta_description %}Explore the latest tech and gaming guides, tutorials, and insights on Aman's Tech and Gaming Guide.{% endblock %}
+
+{% block extra_css %}
+<style>
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .post-card {
+        background: var(--secondary);
+        border: 1px solid var(--primary-light);
+        padding: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .post-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+
+    .post-title {
+        color: var(--primary-light);
+        margin: 0 0 1rem 0;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1.2rem;
+    }
+
+    .post-desc {
+        color: var(--text);
+        margin-bottom: 1rem;
+    }
+
+    .post-meta {
+        font-size: 0.9rem;
+        color: var(--accent);
+    }
+
+    .hero {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 3rem 0;
+        border-bottom: 2px solid var(--primary-light);
+    }
+
+    .create-post-btn {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        font-family: 'Press Start 2P', cursive;
+        margin-top: 1rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .create-post-btn:hover {
+        background: var(--accent);
+        border-color: var(--primary-dark);
+        transform: scale(1.05);
+    }
+
+    .home-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .pokedex-links {
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    .pokedex-links a {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        font-family: 'Press Start 2P', cursive;
+        margin: 0.5rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .pokedex-links a:hover {
+        background: var(--accent);
+        border-color: var(--primary-dark);
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1 class="site-title">Welcome to Tech & Gaming Excellence</h1>
+    <p>Discover in-depth guides, tutorials, and insights</p>
+
+    <div class="home-actions">
+        <a href="{{ url_for('admin.create') }}" class="create-post-btn">
+            Create New Guide
+        </a>
+    </div>
+</section>
+
+<section>
+    <h2>Latest Guides</h2>
+    <div class="post-grid">
+        {% for post in posts %}
+        <article class="post-card">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <p class="post-desc">{{ post.description }}</p>
+            <div class="post-meta">
+                <span>{{ post.category }}</span> •
+                <span>{{ post.date }}</span> •
+                <span>{{ post.views }} views</span>
+            </div>
+            <a href="{{ url_for('main.blog_post', slug=post.slug) }}"
+               style="display: block; margin-top: 1rem; color: var(--primary-light);">
+                Read More →
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="pokedex-links">
+    <h2>Explore the Pokédex</h2>
+    <p>Click on any generation below to explore the respective Pokédex:</p>
+    <a href="{{ url_for('main.pokedex_rby') }}">Gen 1 - Pokémon Red, Yellow & Blue</a>
+    <a href="{{ url_for('main.pokedex_gsc') }}">Gen 2 - Pokémon Gold, Silver & Crystal</a>
+    <a href="{{ url_for('main.pokedex_rse') }}">Gen 3 - Pokémon Ruby, Sapphire, Emerald</a>
+    <a href="{{ url_for('main.pokedex_dppt') }}">Gen 4 - Pokémon Diamond, Pearl, Platinum</a>
+    <a href="{{ url_for('main.pokedex_bw') }}">Gen 5 - Pokémon Black, White</a>
+    <a href="{{ url_for('main.pokedex_xy') }}">Gen 6 - Pokémon X, Y</a>
+    <a href="{{ url_for('main.pokedex_sm') }}">Gen 7 - Pokémon Sun, Moon</a>
+    <a href="{{ url_for('main.pokedex_ss') }}">Gen 8 - Pokémon Sword, Shield</a>
+    <a href="{{ url_for('main.pokedex_sv') }}">Gen 9 - Pokémon Scarlet & Violet</a>
+    <a href="{{ url_for('main.pokedex_nat') }}">Pokémon National Dex</a>
+</section>
+
+
+
+{% endblock %}

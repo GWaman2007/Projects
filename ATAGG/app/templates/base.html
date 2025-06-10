@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="CzFSOoHz9ZFSeFWANxmH3Q4_1GTUq9yR0Z4ZfODURXQ" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+
+    <!-- Primary Meta Tags -->
+    <title>{% block title %}Aman's Tech and Gaming Guide{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Your ultimate resource for tech tutorials and gaming guides{% endblock %}">
+
+    <!-- Base Keywords - Always Present -->
+    {% set base_keywords = "tech guides, gaming tutorials, game walkthrough, tech tutorials, gaming tips, technology help, video game guides, tech solutions, gaming strategies, tech troubleshooting" %}
+
+    <!-- Combined Keywords -->
+<meta name="keywords" content="{{ base_keywords }}{% if page_keywords %}, {{ page_keywords | trim }}{% else %}, default, keywords{% endif %}">
+
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Aman">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/favicon.ico', _external=True) }}{% endblock %}">
+    <meta property="og:site_name" content="Aman's Tech and Gaming Guide">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ self.og_title() }}">
+    <meta name="twitter:description" content="{{ self.og_description() }}">
+    <meta name="twitter:image" content="{{ self.og_image() }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.url }}">
+
+    <!-- Schema.org Markup -->
+    {% block schema_markup %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Aman's Tech and Gaming Guide",
+        "url": "{{ request.url_root }}",
+        "description": "{{ self.meta_description() }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ request.url_root }}search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    {% endblock %}
+
+    <!-- Retro-style fonts with preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap">
+
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #00ff41;
+            --accent: #ff00ff;
+            --text: #ffffff;
+            --secondary: #383838;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text);
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background: var(--secondary);
+            padding: 1rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .site-title {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            margin-right: 1rem;
+            padding: 0.5rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .footer {
+            background: var(--secondary);
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--primary-light);
+        }
+
+        .terminal-effect {
+            position: relative;
+        }
+
+        .terminal-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        /* SEO-friendly heading styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary-light);
+            margin: 1.5em 0 0.5em;
+        }
+
+        /* Accessibility improvements */
+        a:focus, button:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: var(--text);
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="terminal-effect">
+    <!-- Accessibility skip link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="header" role="banner">
+        <a href="{{ url_for('main.home') }}" class="site-title">Aman's Tech & Gaming Guide</a>
+        <nav class="nav-links" role="navigation" aria-label="Main navigation">
+            <a href="{{ url_for('main.home') }}" {% if request.endpoint == 'main.home' %}aria-current="page"{% endif %}>Home</a>
+            <a href="{{ url_for('main.category', category='tech') }}" {% if request.endpoint == 'main.category' and category == 'tech' %}aria-current="page"{% endif %}>Tech Guides</a>
+            <a href="{{ url_for('main.category', category='gaming') }}" {% if request.endpoint == 'main.category' and category == 'gaming' %}aria-current="page"{% endif %}>Gaming Guides</a>
+            {% if session.get('admin_logged_in') %}
+            <a href="{{ url_for('admin.create') }}" {% if request.endpoint == 'admin.create' %}aria-current="page"{% endif %}>Create Post</a>
+            <a href="{{ url_for('admin.logout') }}">Logout</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main id="main-content" class="container" role="main">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div role="alert" aria-live="polite">
+                    {% for message in messages %}
+                        <div class="alert">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>&copy;2025 Aman's Tech & Gaming Guide. All rights reserved.</p>
+    </footer>
+
+    {% block schema_article %}{% endblock %}
+    {% block scripts %}{% endblock %}
+
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Aman's Tech & Gaming Guide",
+        "url": "{{ request.url_root }}",
+        "logo": "{{ url_for('static', filename='images/logo.png', _external=True) }}",
+        "sameAs": [
+            "https://twitter.com/amanstechguide",
+            "https://facebook.com/amanstechguide"
+        ]
+    }
+    </script>
+</body>
+</html>

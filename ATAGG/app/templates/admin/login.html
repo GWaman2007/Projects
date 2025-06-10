@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-form {
+        max-width: 400px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: var(--secondary);
+        border: 1px solid var(--primary-light);
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--primary-light);
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        background: var(--primary-dark);
+        border: 1px solid var(--primary-light);
+        color: var(--text);
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        border: none;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.8rem;
+    }
+
+    .submit-btn:hover {
+        background: var(--accent);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form class="login-form" method="POST">
+    <h2 style="text-align: center; color: var(--primary-light);">Admin Login</h2>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit" class="submit-btn">LOGIN</button>
+</form>
+{% endblock %}

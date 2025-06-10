@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Category: {{ category | capitalize }}{% endblock %}
+
+{% block meta_description %}Explore posts in the {{ category | capitalize }} category{% endblock %}
+
+{% block page_keywords %}{{ category | lower }}, category guides, tech tutorials, gaming guides{% endblock %}
+
+{% block extra_css %}
+<style>
+    .post-card {
+        background-color: var(--secondary);
+        border: 1px solid var(--primary-light);
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    }
+
+    .post-title {
+        color: var(--primary-light);
+        text-decoration: none;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .post-title:hover {
+        color: var(--accent);
+    }
+
+    .post-meta {
+        font-size: 0.9rem;
+        color: var(--text);
+        margin-top: 0.5rem;
+    }
+
+    .no-posts {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--accent);
+        margin-top: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Category: {{ category | capitalize }}</h1>
+
+{% if posts and posts|length > 0 %}
+    <div class="post-list">
+        {% for post in posts %}
+        <div class="post-card">
+            <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="post-title">{{ post.title }}</a>
+            <div class="post-meta">
+                <p>{{ post.description }}</p>
+                <p>Published on: {{ post.date }}</p>
+                <p>Views: {{ post.views }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="no-posts">No posts available in this category yet.</p>
+{% endif %}
+{% endblock %}

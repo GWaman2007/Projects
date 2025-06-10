@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Error{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --primary-light: #00ff41;
+            --accent: #ff00ff;
+            --text: #ffffff;
+            --secondary: #383838;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text);
+            font-family: 'Share Tech Mono', monospace;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-code {
+            font-size: 5rem;
+            color: var(--accent);
+            margin: 2rem 0;
+        }
+
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--primary-light);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <div>
+        <div class="error-code">404</div>
+        <div class="error-message">Page Not Found</div>
+        <p>The page you are looking for doesn’t exist or has been moved.</p>
+        <a href="{{ url_for('main.home') }}">Return to Home</a>
+    </div>
+
+    <div style="display: none" id="error-500">
+        <div class="error-code">500</div>
+        <div class="error-message">Internal Server Error</div>
+        <p>Oops! Something went wrong on our end. Please try again later.</p>
+        <a href="{{ url_for('main.home') }}">Return to Home</a>
+    </div>
+
+    {% if error_code == 500 %}
+        <script>document.getElementById('error-500').style.display = 'block';</script>
+    {% else %}
+        <script>document.querySelector('div').style.display = 'block';</script>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Guide{% endblock %}
+
+{% block extra_css %}
+<style>
+    .delete-form {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: var(--secondary);
+        border: 1px solid var(--primary-light);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--primary-light);
+    }
+
+    .form-group select {
+        width: 100%;
+        padding: 0.5rem;
+        background: var(--primary-dark);
+        border: 1px solid var(--primary-light);
+        color: var(--text);
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        border: none;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+        background: var(--accent);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center; color: var(--primary-light);">Delete Guide</h2>
+
+<form class="delete-form" method="POST">
+    <div class="form-group">
+        <label for="guide_slug">Select Guide to Delete</label>
+        <select id="guide_slug" name="guide_slug" required>
+            <option value="">Select a guide</option>
+            {% for guide in guides %}
+            <option value="{{ guide[0] }}">{{ guide[1] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="submit-btn">Delete Guide</button>
+</form>
+{% endblock %}

@@ -1,0 +1,38 @@
+2025-01-24 21:16:49,049 INFO: Application Initialization Started [in e:\Aman's Tech and Gaming Guide\app\__init__.py:51] - PID: 6420
+2025-01-24 21:16:49,050 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\guides/images [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 6420
+2025-01-24 21:16:49,051 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\guides [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 6420
+2025-01-24 21:16:49,052 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\guides/images [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 6420
+2025-01-24 21:16:49,053 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\data [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 6420
+2025-01-24 21:16:49,055 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\logs [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 6420
+2025-01-24 21:16:49,077 INFO: Application Initialization Complete [in e:\Aman's Tech and Gaming Guide\app\__init__.py:157] - PID: 6420
+2025-01-24 21:17:01,025 INFO: Application Initialization Started [in e:\Aman's Tech and Gaming Guide\app\__init__.py:51] - PID: 10388
+2025-01-24 21:17:01,091 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\uploads [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 10388
+2025-01-24 21:17:01,093 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\guides [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 10388
+2025-01-24 21:17:01,094 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\guides/images [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 10388
+2025-01-24 21:17:01,095 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\data [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 10388
+2025-01-24 21:17:01,096 INFO: Ensured directory exists: e:\Aman's Tech and Gaming Guide\app\logs [in e:\Aman's Tech and Gaming Guide\app\__init__.py:114] - PID: 10388
+2025-01-24 21:17:01,114 INFO: Application Initialization Complete [in e:\Aman's Tech and Gaming Guide\app\__init__.py:157] - PID: 10388
+2025-01-24 21:17:12,616 CRITICAL: Unhandled Exception: 400 Bad Request: The CSRF token is missing. [in e:\Aman's Tech and Gaming Guide\app\__init__.py:136] - PID: 10388
+Traceback (most recent call last):
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask\app.py", line 865, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask\app.py", line 1239, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "E:\Aman's Tech and Gaming Guide\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.

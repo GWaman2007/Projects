@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post['title'] }} - Aman's Tech & Gaming Guide{% endblock %}
+{% block meta_description %}{{ post['description'] }}{% endblock %}
+{% block page_keywords %}{{ post['keywords'] | join(', ') }}{% endblock %}
+
+{% block og_title %}{{ post['title'] }}{% endblock %}
+{% block og_description %}{{ post['description'] }}{% endblock %}
+{% block og_image %}{{ url_for('main.serve_image', slug=post['slug'], filename=post_images[0]) if post_images else url_for('static', filename='images/default-og.png', _external=True) }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .image-slider {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 1rem 0;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        background: var(--secondary);
+        margin-bottom: 2rem;
+    }
+
+    .image-slider img {
+        scroll-snap-align: center;
+        height: 300px;
+        max-width: 100%;
+        object-fit: cover;
+        border: 2px solid var(--primary-light);
+        transition: transform 0.3s ease;
+    }
+
+    .image-slider img:hover {
+        transform: scale(1.05);
+    }
+
+    .post-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1rem;
+    }
+
+    .post-content h1 {
+        text-align: center;
+        color: var(--primary-light);
+        font-size: 2rem;
+    }
+
+    .post-content p {
+        text-align: center;
+        color: var(--text);
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if post_images %}
+    <div class="image-slider">
+        {% for image in post_images %}
+        <img src="{{ url_for('main.serve_image', slug=post['slug'], filename=image) }}" alt="Post Image">
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <article class="post-content">
+        <h1>{{ post['title'] }}</h1>
+        <p>{{ post['description'] }}</p>
+        {{ post_content | safe }}
+    </article>
+{% endblock %}
+
+{% block schema_article %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ post['title'] }}",
+    "description": "{{ post['description'] }}",
+    "image": "{{ url_for('main.serve_image', slug=post['slug'], filename=post_images[0]) if post_images else url_for('static', filename='images/default-og.png', _external=True) }}",
+    "author": {
+        "@type": "Person",
+        "name": "Aman"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Aman's Tech & Gaming Guide",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ url_for('static', filename='images/logo.png', _external=True) }}"
+        }
+    },
+    "datePublished": "{{ post['published_date'] }}",
+    "dateModified": "{{ post['updated_date'] }}",
+    "url": "{{ request.url }}"
+}
+</script>
+{% endblock %}

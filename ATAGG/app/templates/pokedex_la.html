@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Hisui Pokédex - Pokémon Legends: Arceus{% endblock %}
+
+{% block meta_description %}Hisui Pokédex - All Pokémon from Pokémon Legends: Arceus. View Pokémon stats, evolutions, abilities, and more in this complete Hisui Pokédex.{% endblock %}
+
+{% set page_keywords = "Pokedex, Pokemon Legends Arceus, Hisui Pokedex, Hisui Pokemons, Gen 8 Pokemon, Hisuian Pokémon, Hisui Pokédex list, Pokémon Legends Arceus Pokémon list, Pokémon Legends Pokedex" %}
+
+{% block content %}
+    <h1>Hisui Pokédex - Pokémon Legends: Arceus</h1>
+    <p>Welcome to the complete **Pokémon Legends: Arceus** Pokédex! Browse all Pokémon found in the Hisui region.</p>
+
+    <form method="GET" action="">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search" placeholder="Search by name..." value="{{ request.args.get('search', '') }}">
+
+        <label for="sort">Sort by:</label>
+        <select name="sort" id="sort" class="styled-select">
+            <option value="id" {% if request.args.get('sort') == 'id' %}selected{% endif %}>ID</option>
+            <option value="name" {% if request.args.get('sort') == 'name' %}selected{% endif %}>Name</option>
+            <option value="type" {% if request.args.get('sort') == 'type' %}selected{% endif %}>Type</option>
+        </select>
+        <button type="submit" class="styled-button">Apply</button>
+    </form>
+
+    <div class="pokedex">
+        {% for pokemon in pokedex if search|lower in pokemon.name|lower %}
+        <div class="pokemon-card">
+            <img src="{{ pokemon.image_url }}" alt="{{ pokemon.name }}">
+            <h2>#{{ pokemon.species_id }} - {{ pokemon.name.title() }}</h2>
+            <p>Type: {{ ', '.join(pokemon.types) }}</p>
+            <p>Abilities: {{ ', '.join(pokemon.abilities) }}</p>
+            
+            {% if pokemon.hidden_abilities %}
+            <p>Hidden Abilities: {{ ', '.join(pokemon.hidden_abilities) }}</p>
+            {% endif %}
+            
+            {% if pokemon.forms %}
+            <p>Forms: {{ ', '.join(pokemon.forms) }}</p>
+            {% endif %}
+
+            <p>Base Stats:</p>
+            <ul>
+                <li>HP: {{ pokemon.stats.hp }}</li>
+                <li>Attack: {{ pokemon.stats.attack }}</li>
+                <li>Defense: {{ pokemon.stats.defense }}</li>
+                <li>Sp. Atk: {{ pokemon.stats['special-attack'] }}</li>
+                <li>Sp. Def: {{ pokemon.stats['special-defense'] }}</li>
+                <li>Speed: {{ pokemon.stats.speed }}</li>
+            </ul>
+            
+            <p><strong>Evolution:</strong> 
+                {% if pokemon.evolution_chain %}
+                    {{ pokemon.evolution_chain }}
+                {% else %}
+                    No known evolutions.
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .pokedex {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+    .pokemon-card {
+        background: var(--secondary);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        transition: transform 0.2s ease-in-out;
+        width: 100%;
+    }
+    .pokemon-card:hover {
+        transform: scale(1.1);
+    }
+    .pokemon-card img {
+        width: 150px;
+        height: auto;
+    }
+    form {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .styled-select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .styled-select:hover {
+        background-color: #e6e6e6;
+    }
+    .styled-button {
+        padding: 10px 14px;
+        background-color: #00ff41;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s, transform 0.2s;
+    }
+    .styled-button:hover {
+        background-color: #00cc33;
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}

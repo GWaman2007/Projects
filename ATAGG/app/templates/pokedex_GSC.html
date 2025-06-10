@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Jhoto Pokédex - Pokémon Gold & Silver{% endblock %}
+
+{% block meta_description %}Johto Pokedex - All Pokémon from Pokémon Gold, Pokémon Silver, and Pokémon Crystal. View Pokémon stats, evolutions, abilities, and more in this complete Gen 2 Pokédex.{% endblock %}
+
+{% set page_keywords = "Pokedex, Pokemon Gold, Pokemon Silver, Pokemon Crystal, Gen 2 Pokemon, Johto Pokedex, Johto Pokemons, Pokemon stats, Pokemon evolutions, Pokemon Gold Pokedex list, Pokemon Silver Pokedex list, Johto Pokémon, Johto Pokémon list in order, Johto Pokedex checklist, Johto Pokémon list, Pokémon Gold Pokémon list, Pokémon Silver Pokémon list, Pokémon Crystal Pokedex list" %}
+
+{% block content %}
+    <h1>Jhoto Pokédex - Pokémon Gold & Silver</h1>
+    <p>Welcome to the complete Generation 2 Pokédex! Browse all Pokémon from the Johto region.</p>
+
+    <form method="GET" action="">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search" placeholder="Search by name..." value="{{ request.args.get('search', '') }}">
+
+        <label for="sort">Sort by:</label>
+        <select name="sort" id="sort" class="styled-select">
+            <option value="id" {% if request.args.get('sort') == 'id' %}selected{% endif %}>ID</option>
+            <option value="name" {% if request.args.get('sort') == 'name' %}selected{% endif %}>Name</option>
+            <option value="type" {% if request.args.get('sort') == 'type' %}selected{% endif %}>Type</option>
+        </select>
+        <button type="submit" class="styled-button">Apply</button>
+    </form>
+
+    <div class="pokedex">
+        {% for pokemon in pokedex if search|lower in pokemon.name|lower %}
+        <div class="pokemon-card">
+            <img src="{{ pokemon.image_url }}" alt="{{ pokemon.name }}">
+            <h2>#{{ pokemon.species_id }} - {{ pokemon.name.title() }}</h2>
+            <p>Type: {{ ', '.join(pokemon.types) }}</p>
+            <p>Abilities: {{ ', '.join(pokemon.abilities) }}</p>
+            {% if pokemon.hidden_abilities %}
+            <p>Hidden Abilities: {{ ', '.join(pokemon.hidden_abilities) }}</p>
+            {% endif %}
+            {% if pokemon.forms %}
+            <p>Forms: {{ ', '.join(pokemon.forms) }}</p>
+            {% endif %}
+            <p>Base Stats:</p>
+            <ul>
+                <li>HP: {{ pokemon.stats.hp }}</li>
+                <li>Attack: {{ pokemon.stats.attack }}</li>
+                <li>Defense: {{ pokemon.stats.defense }}</li>
+                <li>Sp. Atk: {{ pokemon.stats['special-attack'] }}</li>
+                <li>Sp. Def: {{ pokemon.stats['special-defense'] }}</li>
+                <li>Speed: {{ pokemon.stats.speed }}</li>
+            </ul>
+            <p>Evolution: {{ pokemon.evolution_chain }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
